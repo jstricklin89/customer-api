@@ -54,6 +54,25 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /customer/phone/{phone}:
+    x-swagger-router-controller: customer
+    get:
+      description: get a customer by phoneNumber
+      operationId: getOneByPhone
+      parameters:
+        - name: phone
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCustomerResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /customer/{id}:
     # our controller name
     x-swagger-router-controller: customer
@@ -88,9 +107,9 @@ paths:
         - name: name
           description: Customer properties
           in: body
-          required: true
+          required: false
           schema:
-            $ref: "#/definitions/Customer"
+            $ref: "#/definitions/PutCustomer"
       responses:
         "200":
           description: Success
@@ -193,6 +212,26 @@ definitions:
       - phoneNumber
       - emailAddress
       - birthDate
+  PutCustomer:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Customer name
+      address: 
+        type: string
+        description: Customer address
+      phoneNumber:
+        type: number
+        description: Customer phone number
+      emailAddress:
+        type: string
+        description: Customer email address
+      birthDate: 
+        type: number
+        description: Customer birth date
+    required:
+      - phoneNumber
   GeneralResponse:
     type: object
     properties:

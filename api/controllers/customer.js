@@ -2,7 +2,7 @@
 // Include our "db"
 var db = require("../../config/db")();
 // Exports all the functions to perform on the db
-module.exports = { getAll, save, getOne, update, delCustomer };
+module.exports = { getAll, save, getOne, update, delCustomer, getOneByPhone };
 
 //GET /customer operationId
 function getAll(req, res, next) {
@@ -19,6 +19,16 @@ function save(req, res, next) {
 function getOne(req, res, next) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
   var customer = db.find(id);
+  if (customer) {
+    res.json(customer);
+  } else {
+    res.status(204).send();
+  }
+}
+//GET /customer/phone/{phone} operationId
+function getOneByPhone(req, res, next) {
+  var phone = req.swagger.params.phone.value; //req.swagger contains the path parameters
+  var customer = db.findByPhone(phone);
   if (customer) {
     res.json(customer);
   } else {

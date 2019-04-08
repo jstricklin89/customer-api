@@ -15,7 +15,7 @@ module.exports = [
     phoneNumber: 1238903453,
     emailAddress: "jadoe@gmail.com",
     birthDate: 23456756,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "1d4944a90cd46de7d865589e51a1f4647e24fc5c"
   },
   {
     name: "John Doe",
@@ -23,7 +23,7 @@ module.exports = [
     phoneNumber: 4568902347,
     emailAddress: "jodoe@gmail.com",
     birthDate: 87349856,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "1faa45ea75766e736600b66fb96c357a840503b5"
   },
   {
     name: "John Snow",
@@ -31,7 +31,7 @@ module.exports = [
     phoneNumber: 4320985431,
     emailAddress: "jsnow@gmail.com",
     birthDate: 76762365,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "34d4038c02a17bb5e9424f702abc894d7a781a8b"
   },
   {
     name: "Queen Elizabeth",
@@ -39,7 +39,7 @@ module.exports = [
     phoneNumber: 9872345678,
     emailAddress: "qeliza@gmail.com",
     birthDate: 87873434,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "70bc80f4d9ebfb0c876a81007d812e6a18a49856"
   },
   {
     name: "Bill Gates",
@@ -47,7 +47,7 @@ module.exports = [
     phoneNumber: 8734765698,
     emailAddress: "bgates@gmail.com",
     birthDate: 43786589,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "3511fba34a94c09e38aa6e56435cff354f08ac79"
   },
   {
     name: "Marc Andressen",
@@ -55,14 +55,14 @@ module.exports = [
     phoneNumber: 9876547654,
     emailAddress: "mandressen@gmail.com",
     birthDate: 87349856,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "e66efaedff9415e969ca0f3f57cafaa54e636622"
   },
   {
     name: "Sam Harris",
     address: "1234 Random Universe Ave. Saturn, CA 12367",
-    phoneNumber: 8768768761,
+    phoneNumber: 1234567890,
     emailAddress: "sharris@gmail.com",
     birthDate: 87349856,
-    id: crypto.randomBytes(20).toString("hex")
+    id: "ad3ae511df8b33307db3348bd4792736a4e6195b"
   }
 ];

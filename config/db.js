@@ -27,6 +27,18 @@ module.exports = function() {
       }
     },
     /*
+     * Retrieve a customer with a given phone number or return all the customers if the phone number is undefined.
+     */
+    findByPhone(phone) {
+      if (phone) {
+        return this.customerList.filter(element => {
+          return element.phoneNumber === phone;
+        });
+      } else {
+        return this.customerList;
+      }
+    },
+    /*
      * Delete a customer with the given id.
      */
     remove(id) {
