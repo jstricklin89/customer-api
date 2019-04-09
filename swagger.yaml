@@ -1,0 +1,253 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Customer Data App
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /customer:
+    # our controller name
+    x-swagger-router-controller: customer
+    get:
+      description: get the customers list
+      # define the type of response for Success "200" and Error
+      operationId: getAll
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCustomersListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new customer to the list
+      # customer info to be stored
+      operationId: save
+      parameters:
+        - name: name
+          description: Customer properties
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /customer/phone/{phone}:
+    x-swagger-router-controller: customer
+    get:
+      description: get a customer by phoneNumber
+      operationId: getOneByPhone
+      parameters:
+        - name: phone
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCustomerResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /customer/{id}:
+    # our controller name
+    x-swagger-router-controller: customer
+    get:
+      description: get a customer
+      # define the type of response for Success "200" and Error
+      operationId: getOne
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCustomerResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a customer
+      # define the parameters
+      operationId: update
+      parameters:
+        - name: id
+          description: Customer id
+          type: string
+          in: path
+          required: true
+        - name: name
+          description: Customer properties
+          in: body
+          required: false
+          schema:
+            $ref: "#/definitions/PutCustomer"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      description: delete a customer
+      # define the parameters
+      operationId: delCustomer
+      parameters:
+        - name: id
+          description: Customer id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  GetCustomersListResponse:
+    required:
+      - customers
+    properties:
+      # The array of customers
+      customers:
+        type: array
+        items: 
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+              maxLength: 100
+            address: 
+              type: string
+              maxLength: 255
+            phoneNumber:
+              type: number
+            emailAddress:
+              type: string
+              maxLength: 100
+            birthDate: 
+              type: number
+  GetCustomerResponse:
+    required:
+      - id
+      - name
+      - address
+      - phoneNumber
+      - emailAddress
+      - birthDate
+    properties:
+      id:
+        type: string
+      name: 
+        type: string
+      address: 
+        type: string
+      phoneNumber:
+        type: number
+      emailAddress:
+        type: string
+      birthDate: 
+        type: number
+  Customer:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Customer name
+      address: 
+        type: string
+        description: Customer address
+      phoneNumber:
+        type: number
+        description: Customer phone number
+      emailAddress:
+        type: string
+        description: Customer email address
+      birthDate: 
+        type: number
+        description: Customer birth date
+    required:
+      - name
+      - address
+      - phoneNumber
+      - emailAddress
+      - birthDate
+  PutCustomer:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Customer name
+      address: 
+        type: string
+        description: Customer address
+      phoneNumber:
+        type: number
+        description: Customer phone number
+      emailAddress:
+        type: string
+        description: Customer email address
+      birthDate: 
+        type: number
+        description: Customer birth date
+    required:
+      - phoneNumber
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment 
+    required:
+      - success
+      - description
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  

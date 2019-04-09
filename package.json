@@ -10,14 +10,17 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "express": "^4.12.3",
+    "request": "^2.88.0",
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
+    "jasmine": "^3.4.0",
     "should": "^7.1.0",
     "supertest": "^1.0.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test"
+    "test-init": "./node_modules/jasmine/bin/jasmine.js init",
+    "test": "./node_modules/jasmine/bin/jasmine.js"
   }
 }
